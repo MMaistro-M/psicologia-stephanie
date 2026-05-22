@@ -32,16 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const mensagem = document.getElementById('mensagem').value.trim();
 
             if (!nome || !email || !whatsapp) {
-                feedbackDiv.innerHTML = '<span style="color: #e74c3c;">❌ Preencha nome, e-mail e WhatsApp.</span>';
+                feedbackDiv.innerHTML = '<span style="color: #e74c3c;"> Preencha nome, e-mail e WhatsApp.</span>';
                 return;
             }
 
             if (!email.includes('@') || !email.includes('.')) {
-                feedbackDiv.innerHTML = '<span style="color: #e74c3c;">❌ Email inválido.</span>';
+                feedbackDiv.innerHTML = '<span style="color: #e74c3c;"> Email inválido.</span>';
                 return;
             }
 
-            let textoWhatsApp = `🆕 *NOVO AGENDAMENTO!*%0A%0A`;
+            let textoWhatsApp = ` *NOVO AGENDAMENTO!*%0A%0A`;
             textoWhatsApp += `*Nome:* ${nome}%0A`;
             textoWhatsApp += `*E-mail:* ${email}%0A`;
             textoWhatsApp += `*WhatsApp:* ${whatsapp}%0A`;
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 textoWhatsApp += `*Mensagem:* ${mensagem}%0A`;
             }
             
-            textoWhatsApp += `%0A📅 *Data:* ${new Date().toLocaleString('pt-BR')}%0A`;
-            textoWhatsApp += `%0A Responda diretamente por aqui! ✅`;
+            textoWhatsApp += `%0A *Data:* ${new Date().toLocaleString('pt-BR')}%0A`;
+            textoWhatsApp += `%0A Responda diretamente por aqui! `;
 
             const linkWhatsApp = `https://wa.me/${NUMERO_PSICOLOGA}?text=${textoWhatsApp}`;
 
-            feedbackDiv.innerHTML = '<span style="color: #27ae60;">✅ Redirecionando para o WhatsApp... Clique em "Enviar" para confirmar o agendamento.</span>';
+            feedbackDiv.innerHTML = '<span style="color: #27ae60;"> Redirecionando para o WhatsApp... Clique em "Enviar" para confirmar o agendamento.</span>';
             
             form.reset();
 
