@@ -4,8 +4,8 @@
 }
 
 body {
-    background-color: #fef9f0;
-    color: #4a3b2f; /* Tom de marrom escuro para melhor leitura */
+    background-color: #fceee8; 
+    color: #4a3b2f; 
     scroll-behavior: smooth;
 }
 
@@ -13,22 +13,46 @@ body {
     color: #7a4a2a;
 }
 
-.bg-acolhedor {
-    background-color: #fcf3ea;
+/* --- DESENHO DA LOGO --- */
+.logo-desenho {
+    margin-bottom: 30px;
+}
+
+.logo-titulo {
+    font-size: 48px;
+    font-weight: 700;
+    color: #4a2a1a;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.logo-linha {
+    width: 100px;
+    height: 5px;
+    background-color: #e67e22;
+    margin-bottom: 15px;
+    border-radius: 3px;
+}
+
+.logo-subtitulo {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4a2a1a;
+    letter-spacing: 6px;
 }
 
 /* --- HERO & ESTRUTURA --- */
 .hero-bg {
-    background: linear-gradient(135deg, #fff5e6 0%, #feede0 100%);
-    border-radius: 0 0 40px 40px;
-    padding: 3rem 0;
+    background: linear-gradient(180deg, #f7cdc1 0%, #fceee8 100%);
+    border-radius: 0 0 50px 50px;
+    padding: 3rem 0 5rem 0;
 }
 
-.card-sofisticado {
+.card-sofisticado, .card-contato-container {
     background: white;
     border-radius: 35px;
     border: none;
-    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+    box-shadow: 0 20px 40px -15px rgba(122, 74, 42, 0.08);
     transition: transform 0.3s ease;
 }
 
@@ -36,26 +60,26 @@ body {
     transform: translateY(-5px);
 }
 
-/* --- NOVOS CARDS DE IDENTIFICAÇÃO (Para quem é o atendimento) --- */
+/* --- CARDS DE IDENTIFICAÇÃO --- */
 .card-acolhedor {
     background: white;
     border-radius: 25px;
     border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    box-shadow: 0 10px 30px rgba(122, 74, 42, 0.04);
     transition: 0.3s ease;
     text-align: center;
 }
 
 .card-acolhedor:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 35px rgba(122, 74, 42, 0.08);
 }
 
 .card-acolhedor i {
-    color: #e7b183; /* Tom de pêssego/laranja suave */
+    color: #e29c8a;
 }
 
-/* --- LISTA CUSTOMIZADA (Seção Processo Terapêutico) --- */
+/* --- LISTA CUSTOMIZADA --- */
 .custom-list {
     padding-left: 0;
 }
@@ -75,11 +99,11 @@ body {
 
 /* --- BOTÕES --- */
 .btn-whatsapp-custom {
-    background-color: #25D366;
+    background-color: #697463;
     color: white;
     border-radius: 50px;
-    padding: 12px 28px;
-    font-weight: 600;
+    padding: 14px 32px;
+    font-weight: 500;
     border: none;
     transition: all 0.3s ease;
     display: inline-flex;
@@ -88,14 +112,14 @@ body {
 }
 
 .btn-whatsapp-custom:hover {
-    background-color: #1da15a;
-    transform: scale(1.05);
+    background-color: #535c4e;
+    transform: scale(1.03);
     color: white;
 }
 
 .btn-outline-acolher {
-    border: 2px solid #c89f7b;
-    color: #8b5a2b;
+    border: 2px solid #e29c8a;
+    color: #7a4a2a;
     border-radius: 40px;
     padding: 10px 24px;
     font-weight: 500;
@@ -104,19 +128,21 @@ body {
 }
 
 .btn-outline-acolher:hover {
-    background-color: #c89f7b20;
-    border-color: #b47c44;
+    background-color: #e29c8a20;
+    border-color: #7a4a2a;
 }
 
 .btn-enviar {
-    background: #9b6b43;
+    background: #697463;
     border: none;
     color: white;
+    border-radius: 50px;
+    padding: 10px 30px;
     transition: all 0.3s ease;
 }
 
 .btn-enviar:hover {
-    background: #7a4a2a;
+    background: #535c4e;
     transform: translateY(-2px);
     color: white;
 }
@@ -129,12 +155,11 @@ body {
 
 .img-hero-custom {
     width: 100%;
-    max-width: 420px;
-    height: 500px; 
+    max-width: 415px; 
+    height: 450px; 
     object-fit: cover; 
-    border-radius: 60px 160px 60px 160px; 
-    box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15);
-    border: 8px solid white;
+    border-radius: 50% 50% 40% 40%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
 .img-secundaria {
@@ -144,7 +169,18 @@ body {
     border-radius: 40px;
 }
 
-/* --- FAQ (ACORDEÃO) --- */
+/* --- IMAGEM SOBRE MIM --- */
+.img-perfil-redonda {
+    width: 250px !important;
+    height: 250px !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    display: inline-block;
+    box-shadow: 0 12px 28px rgba(122, 74, 42, 0.12);
+    border: 6px solid #fff;
+}
+
+/* --- FAQ --- */
 .accordion-item {
     border: none;
     margin-bottom: 10px;
@@ -161,41 +197,44 @@ body {
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #fff5e6;
+    background-color: #fbeae3;
     color: #7a4a2a;
     box-shadow: none;
 }
 
 .accordion-button:focus {
     box-shadow: none;
-    border-color: rgba(200, 159, 123, 0.5);
 }
 
-/* --- DEPOIMENTOS --- */
-.depoimento-card {
-    background: white;
-    border-radius: 28px;
-    padding: 1.5rem;
-    border-left: 8px solid #e7b183;
-    transition: transform 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+/* --- CONTAINER DO VÍDEO VERTICAL --- */
+.video-container {
+    position: relative;
+    width: 320px; 
+    height: 568px; 
+    margin: 0 auto; 
+    overflow: hidden;
+    border-radius: 36px; 
+    box-shadow: 0 25px 50px rgba(122, 74, 42, 0.18);
+    background-color: #000;
+    border: 7px solid #4a3b2f; 
+}
+
+.video-container iframe {
+    width: 100%;
     height: 100%;
-}
-
-.depoimento-card:hover {
-    transform: translateX(5px);
+    border: none;
 }
 
 /* --- RODAPÉ --- */
 footer {
-    background: #2d2a24;
-    color: #e4d5c0;
+    background: #4a3b2f; 
+    color: #fceee8;
     margin-top: 5rem;
-    padding: 3rem 0 1.5rem 0;
+    padding: 4rem 0 2rem 0;
 }
 
 footer i {
-    color: #e7b183;
+    color: #e29c8a;
 }
 
 /* --- WHATSAPP FLUTUANTE --- */
@@ -203,35 +242,58 @@ footer i {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background-color: #25D366;
+    background-color: #697463;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     z-index: 1000;
     transition: 0.3s;
     text-decoration: none;
 }
 
 .whatsapp-float:hover {
-    background-color: #128C7E;
+    background-color: #535c4e;
     transform: scale(1.1);
 }
 
 .whatsapp-float i {
-    font-size: 32px;
+    font-size: 30px;
     color: white;
 }
 
 /* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 991px) {
+    .logo-desenho {
+        text-align: center;
+    }
+    
+    .logo-titulo {
+        font-size: 34px;
+    }
+    
+    .logo-linha {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80px;
+    }
+    
+    .logo-subtitulo {
+        font-size: 13px;
+        letter-spacing: 4px;
+    }
+
+    .conteudo-texto {
+        text-align: center;
+    }
+
     .img-hero-custom {
-        height: 400px;
         max-width: 100%;
-        border-radius: 40px;
+        height: 380px;
+        margin-top: 2rem;
     }
     
     .img-secundaria {
@@ -245,5 +307,16 @@ footer i {
     .accordion-button {
         padding: 1rem;
         font-size: 0.95rem;
+    }
+    
+    .video-container {
+        width: 280px;
+        height: 497px; 
+    }
+
+    .img-perfil-redonda {
+        width: 200px !important;
+        height: 200px !important;
+        margin-top: 2rem;
     }
 }

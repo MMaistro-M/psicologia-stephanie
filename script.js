@@ -1,4 +1,22 @@
-// Função para scroll suave
+// ============================================
+// CONFIGURAÇÃO DO FIREBASE (COM SEUS DADOS)
+// ============================================
+const firebaseConfig = {
+    apiKey: "AIzaSyAVbQpgpgx_O0Qr8UjyeeI4OyyC6fHBF0Y",
+    authDomain: "site-psicologa-29375.firebaseapp.com",
+    projectId: "site-psicologa-29375",
+    storageBucket: "site-psicologa-29375.firebasestorage.app",
+    messagingSenderId: "77814198358",
+    appId: "1:77814198358:web:c351c16f6785b612314bf7"
+};
+
+// Inicializar Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// ============================================
+// FUNÇÃO PARA SCROLL SUAVE
+// ============================================
 function scrollToSection(id) {
     const element = document.getElementById(id);
     if (element) {
@@ -6,10 +24,9 @@ function scrollToSection(id) {
     }
 }
 
-// Configuração da API (backend)
-const API_BASE_URL = 'http://localhost:3000/api/contato';
-
-// Aguardar o DOM carregar
+// ============================================
+// ENVIO DO FORMULÁRIO PARA O FIREBASE
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formContato');
     const feedbackDiv = document.getElementById('formFeedback');
@@ -25,70 +42,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Validações
             if (!nome || !email || !whatsapp) {
-                feedbackDiv.innerHTML = '<span class="text-danger">❌ Preencha nome, e-mail e WhatsApp.</span>';
+                feedbackDiv.innerHTML = '<span style="color: #e74c3c;">❌ Preencha nome, e-mail e WhatsApp.</span>';
                 return;
             }
 
             if (!email.includes('@') || !email.includes('.')) {
-                feedbackDiv.innerHTML = '<span class="text-danger">❌ Email inválido.</span>';
+                feedbackDiv.innerHTML = '<span style="color: #e74c3c;">❌ Email inválido.</span>';
                 return;
             }
 
+            // Mostrar carregando
+            feedbackDiv.innerHTML = '<span style="color: #7a4a2a;">📤 Enviando...</span>';
+
             const dadosContato = {
-                nome,
-                email,
-                whatsapp,
-                mensagem,
-                dataEnvio: new Date().toISOString()
+                nome: nome,
+                email: email,
+                whatsapp: whatsapp,
+                mensagem: mensagem,
+                dataEnvio: new Date().toISOString(),
+                status: 'novo'
             };
 
-            // Tentar enviar para o backend
             try {
-                const response = await fetch(API_BASE_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dadosContato)
-                });
-
-                if (response.ok) {
-                    const resultado = await response.json();
-                    feedbackDiv.innerHTML = '<span class="text-success">✅ Contato salvo com sucesso no MongoDB! Agradeço o interesse, em breve retornarei.</span>';
-                    form.reset();
-                    setTimeout(() => {
-                        feedbackDiv.innerHTML = '';
-                    }, 5000);
-                } else {
-                    fallbackSalvarLocal(dadosContato);
-                }
+                // Salvar no Firebase Firestore
+                await db.collection('agendamentos').add(dadosContato);
+                
+                // Sucesso
+                feedbackDiv.innerHTML = '<span style="color: #27ae60;">✅ Mensagem enviada com sucesso! Agradeço o interesse, em breve entrarei em contato.</span>';
+                form.reset();
+                
+                // Limpar mensagem após 5 segundos
+                setTimeout(() => {
+                    feedbackDiv.innerHTML = '';
+                }, 5000);
+                
             } catch (error) {
-                console.warn('Backend MongoDB não encontrado, usando fallback local.', error);
-                fallbackSalvarLocal(dadosContato);
+                console.error('Erro ao salvar no Firebase:', error);
+                feedbackDiv.innerHTML = '<span style="color: #e74c3c;">❌ Erro ao enviar. Tente novamente ou me chame diretamente no WhatsApp.</span>';
             }
         });
     }
 });
 
-// Fallback para salvar localmente (demo)
-function fallbackSalvarLocal(dados) {
-    let contatos = JSON.parse(localStorage.getItem('contatos_psi')) || [];
-    contatos.push(dados);
-    localStorage.setItem('contatos_psi', JSON.stringify(contatos));
-
-    const feedbackDiv = document.getElementById('formFeedback');
-    feedbackDiv.innerHTML = `
-        <span class="text-info">📋 Dados armazenados localmente (demo).</span><br>
-        <small>Nome: ${dados.nome} | Contato salvo como simulação.</small>
-    `;
-
-    const form = document.getElementById('formContato');
-    form.reset();
-
-    setTimeout(() => {
-        if (feedbackDiv.innerHTML.includes('demo')) {
-            feedbackDiv.innerHTML = '';
-        }
-    }, 6000);
-}
-
-// Mostrar instruções no console
-console.log('🚀 Protótipo pronto! Configure o backend conforme o guia abaixo.');
+console.log('🚀 Site conectado ao Firebase! Os agendamentos serão salvos no Firestore.');
+console.log('📊 Para ver os dados: https://console.firebase.google.com/');
