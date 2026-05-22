@@ -1,21 +1,12 @@
 // ============================================
-// CONFIGURAÇÃO DO FIREBASE (COM SEUS DADOS)
+// NÚMERO DO WHATSAPP DA PSICÓLOGA
 // ============================================
-const firebaseConfig = {
-    apiKey: "AIzaSyAVbQpgpgx_O0Qr8UjyeeI4OyyC6fHBF0Y",
-    authDomain: "site-psicologa-29375.firebaseapp.com",
-    projectId: "site-psicologa-29375",
-    storageBucket: "site-psicologa-29375.firebasestorage.app",
-    messagingSenderId: "77814198358",
-    appId: "1:77814198358:web:c351c16f6785b612314bf7"
-};
-
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// ALTERE AQUI PARA O SEU NÚMERO COM DDD
+// Exemplo: 5511999999999 (55 Brasil + 11 DDD + 999999999 número)
+const NUMERO_PSICOLOGA = "5519999959009";
 
 // ============================================
-// FUNÇÃO PARA SCROLL SUAVE
+// SCROLL SUAVE
 // ============================================
 function scrollToSection(id) {
     const element = document.getElementById(id);
@@ -25,14 +16,14 @@ function scrollToSection(id) {
 }
 
 // ============================================
-// ENVIO DO FORMULÁRIO PARA O FIREBASE
+// ENVIO DO FORMULÁRIO PARA O WHATSAPP
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formContato');
     const feedbackDiv = document.getElementById('formFeedback');
 
     if (form) {
-        form.addEventListener('submit', async (e) => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const nome = document.getElementById('nome').value.trim();
@@ -40,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const whatsapp = document.getElementById('whatsapp').value.trim();
             const mensagem = document.getElementById('mensagem').value.trim();
 
-            // Validações
             if (!nome || !email || !whatsapp) {
                 feedbackDiv.innerHTML = '<span style="color: #e74c3c;">❌ Preencha nome, e-mail e WhatsApp.</span>';
                 return;
@@ -51,38 +41,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Mostrar carregando
-            feedbackDiv.innerHTML = '<span style="color: #7a4a2a;">📤 Enviando...</span>';
+            let textoWhatsApp = `🆕 *NOVO AGENDAMENTO!*%0A%0A`;
+            textoWhatsApp += `*Nome:* ${nome}%0A`;
+            textoWhatsApp += `*E-mail:* ${email}%0A`;
+            textoWhatsApp += `*WhatsApp:* ${whatsapp}%0A`;
+            
+            if (mensagem) {
+                textoWhatsApp += `*Mensagem:* ${mensagem}%0A`;
+            }
+            
+            textoWhatsApp += `%0A📅 *Data:* ${new Date().toLocaleString('pt-BR')}%0A`;
+            textoWhatsApp += `%0A Responda diretamente por aqui! ✅`;
 
-            const dadosContato = {
-                nome: nome,
-                email: email,
-                whatsapp: whatsapp,
-                mensagem: mensagem,
-                dataEnvio: new Date().toISOString(),
-                status: 'novo'
-            };
+            const linkWhatsApp = `https://wa.me/${NUMERO_PSICOLOGA}?text=${textoWhatsApp}`;
 
-            try {
-                // Salvar no Firebase Firestore
-                await db.collection('agendamentos').add(dadosContato);
+            feedbackDiv.innerHTML = '<span style="color: #27ae60;">✅ Redirecionando para o WhatsApp... Clique em "Enviar" para confirmar o agendamento.</span>';
+            
+            form.reset();
+
+            setTimeout(() => {
+                window.open(linkWhatsApp, '_blank');
+                feedbackDiv.innerHTML = '<span style="color: #7a4a2a;">📱 Você será redirecionado ao WhatsApp. Envie a mensagem para confirmar!</span>';
                 
-                // Sucesso
-                feedbackDiv.innerHTML = '<span style="color: #27ae60;">✅ Mensagem enviada com sucesso! Agradeço o interesse, em breve entrarei em contato.</span>';
-                form.reset();
-                
-                // Limpar mensagem após 5 segundos
                 setTimeout(() => {
                     feedbackDiv.innerHTML = '';
-                }, 5000);
-                
-            } catch (error) {
-                console.error('Erro ao salvar no Firebase:', error);
-                feedbackDiv.innerHTML = '<span style="color: #e74c3c;">❌ Erro ao enviar. Tente novamente ou me chame diretamente no WhatsApp.</span>';
-            }
+                }, 8000);
+            }, 1000);
         });
     }
 });
 
-console.log('🚀 Site conectado ao Firebase! Os agendamentos serão salvos no Firestore.');
-console.log('📊 Para ver os dados: https://console.firebase.google.com/');
+console.log('🚀 Formulário configurado para enviar mensagens direto para o WhatsApp!');

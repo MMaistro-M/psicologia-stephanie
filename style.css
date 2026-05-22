@@ -1,4 +1,3 @@
-/* --- CONFIGURAÇÕES GERAIS --- */
 * {
     font-family: 'Inter', sans-serif;
 }
@@ -13,7 +12,6 @@ body {
     color: #7a4a2a;
 }
 
-/* --- DESENHO DA LOGO --- */
 .logo-desenho {
     margin-bottom: 30px;
 }
@@ -41,7 +39,6 @@ body {
     letter-spacing: 6px;
 }
 
-/* --- HERO & ESTRUTURA --- */
 .hero-bg {
     background: linear-gradient(180deg, #f7cdc1 0%, #fceee8 100%);
     border-radius: 0 0 50px 50px;
@@ -60,7 +57,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* --- CARDS DE IDENTIFICAÇÃO --- */
 .card-acolhedor {
     background: white;
     border-radius: 25px;
@@ -79,7 +75,6 @@ body {
     color: #e29c8a;
 }
 
-/* --- LISTA CUSTOMIZADA --- */
 .custom-list {
     padding-left: 0;
 }
@@ -97,7 +92,6 @@ body {
     font-size: 1.2rem;
 }
 
-/* --- BOTÕES --- */
 .btn-whatsapp-custom {
     background-color: #697463;
     color: white;
@@ -147,7 +141,6 @@ body {
     color: white;
 }
 
-/* --- TRATAMENTO DAS IMAGENS --- */
 .image-container-main {
     position: relative;
     display: inline-block;
@@ -169,7 +162,6 @@ body {
     border-radius: 40px;
 }
 
-/* --- IMAGEM SOBRE MIM --- */
 .img-perfil-redonda {
     width: 250px !important;
     height: 250px !important;
@@ -180,7 +172,6 @@ body {
     border: 6px solid #fff;
 }
 
-/* --- FAQ --- */
 .accordion-item {
     border: none;
     margin-bottom: 10px;
@@ -206,7 +197,6 @@ body {
     box-shadow: none;
 }
 
-/* --- CONTAINER DO VÍDEO VERTICAL --- */
 .video-container {
     position: relative;
     width: 320px; 
@@ -225,7 +215,6 @@ body {
     border: none;
 }
 
-/* --- RODAPÉ --- */
 footer {
     background: #4a3b2f; 
     color: #fceee8;
@@ -237,7 +226,6 @@ footer i {
     color: #e29c8a;
 }
 
-/* --- WHATSAPP FLUTUANTE --- */
 .whatsapp-float {
     position: fixed;
     bottom: 25px;
@@ -265,7 +253,6 @@ footer i {
     color: white;
 }
 
-/* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 991px) {
     .logo-desenho {
         text-align: center;
